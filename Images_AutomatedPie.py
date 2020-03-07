@@ -31,14 +31,14 @@ CSVNames = ['ACData_Jan2019.csv','ACData_Feb2019.csv','ACData_Mar2019.csv',
 C_Name = ['BLD A (KW)', 'BLD A FITNESS ZONE (KW)', 'BLD B (KW)', 'BLD C (kW)',
           'BLD D (KW)', 'BLD E (KW)', 'BLD G (KW)', 'BLD H (KW)', 'BLD J (KW)',
           'BLD K (KW)', 'BLD M (KW)', 'BLD N (KW)', 'BLD P (KW)', 'BLD S (KW)',
-          'BLD T (KW)', 'BLD V (KW)', 'BLD Z (KW)', 'RES PH 1 & 2 (KW)', 'RES PH 3 (KW)',]
+          'BLD T (KW)', 'BLD V (KW)', 'BLD Z (KW)', 'RES PH 1 & 2 (KW)', 'RES PH 3 (KW)']
 
 DataNames = []
 
 MonthNumber = (int(CurrentDay[5:7])-1)
 
 #Selects the appropriate file to import based on current month number
-SensorData = pd.read_csv('%s' %CSVNames[MonthNumber])
+SensorData = pd.read_csv('csv/%s' %CSVNames[MonthNumber])
 
 #This for loop will generate a number of charts based on the given days
 for i in range(TotalHours):    
@@ -78,7 +78,8 @@ for i in range(TotalHours):
 ########## End of debigging print statements  ####################################################
 
   #This list is referenced later to set the colours used in the chart. uses CSS colours
-  colors = []
+  colors = ["Salmon", "LightSalmon", "Aquamarine", "Mediumaquamarine", "Lightskyblue", "Deepskyblue", "moccasin", "paleturquoise", 
+            "Orange", "Darkorange", "Khaki", "Darkkhaki", "Palegreen", "Springgreen", "Lightgreen", "cornflowerblue", "Plum", "Orchid"]
 
   fig = go.Figure(data=[go.Pie(labels=["Building A (%.2fKW)" %float(SensorData.loc[Hour,C_Name[0]]), "Building B (%.2fKW)" %float(SensorData.loc[Hour,C_Name[2]]), 
                                        "Building C (%.2fKW)" %float(SensorData.loc[Hour,C_Name[3]]), "Building D (%.2fKW)" %float(SensorData.loc[Hour,C_Name[4]]), 
@@ -107,10 +108,12 @@ for i in range(TotalHours):
                     showlegend=False)
   
   #Outputs the chart to the image files.
-  FileName = ("PieChartFig%d.svg" %(i))
+  FileName = ("PieWeb/charts/PieChartFig%d.svg" %(i))
   fig.write_image(FileName)
 
   Hour += 1 #(Increments the hour)
+  print ("chart %s" %i)
+  
   
   #time.sleep(0.5) #Adds a 500 millisecond delay to the for loop
 

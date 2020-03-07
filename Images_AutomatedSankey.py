@@ -6,7 +6,6 @@ Created on Wed Mar  4 15:19:47 2020
 """
 
 from datetime import date
-import time
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
@@ -39,7 +38,7 @@ DataNames = []
 MonthNumber = (int(CurrentDay[5:7])-1)
 
 #Selects the appropriate file to import based on current month number
-SensorData = pd.read_csv('%s' %CSVNames[MonthNumber])
+SensorData = pd.read_csv('csv/%s' %CSVNames[MonthNumber])
 
 #This for loop will generate a number of charts based on the given days
 for i in range(TotalHours):    
@@ -122,9 +121,11 @@ for i in range(TotalHours):
                "Residence 3 (%.2fKW)" %float(SensorData.loc[Hour,C_Name[18]])],
       
       #Used to select colours for the charts
-      color = ["Seagreen", "Turquoise", "Teal", "Green", "Green", "Yellow", "Red", "Red", "Red", "Red", "Red", "Red", "Red", 
-               "Red", "Red", "Red", "Red", "Red", "Red", "Red", "Red", "Red", "Red", "Red"]
+      color = ["Teal", "Turquoise", "Paleturquoise", "Green", "Green", "blueviolet", "Salmon", "LightSalmon", "Aquamarine", "Mediumaquamarine", 
+               "Lightskyblue", "Deepskyblue", "moccasin", "paleturquoise", "Orange", "Darkorange", "Khaki", "Darkkhaki", "Palegreen", 
+               "Springgreen", "Lightgreen", "cornflowerblue", "Plum", "Orchid"]
     ),
+
     #This dictionary is used to specify the constraints of the sankey diagram
     link = dict(
       #source is used specifiy where each trace begins. Starts at 0
@@ -145,9 +146,10 @@ for i in range(TotalHours):
   fig.update_layout(font_size=9)
   
   #Outputs the chart to the image files.
-  FileName = ("SankeyFig%d.svg" %(i))
+  FileName = ("SankeyWeb/charts/SankeyFig%d.svg" %(i))
   fig.write_image(FileName)
-
+  
+  print ("chart %s" %i)
   Hour += 1 #(Increments the hour)
   
   #time.sleep(0.5) #Adds a 500 millisecond delay to the for loop

@@ -19,7 +19,6 @@ CurrentDay = str(date.today())
 
 #This is a simple algorithm that caclculates the row number from today's date
 Row = ((int(CurrentDay[8:])-1)*24)
-
 #This will be used to reference a row in the .csv. Hours are all sequential so hours can be used to designate for the whole month
 StartHour = Row 
 EndHour = StartHour + TotalHours
@@ -42,7 +41,7 @@ C_Name = ['BLD A (KW)', 'BLD A FITNESS ZONE (KW)', 'BLD B (KW)', 'BLD C (kW)',
 MonthNumber = (int(CurrentDay[5:7])-1)
 
 #Selects the appropriate file to import based on current month number
-SensorData = pd.read_csv('%s' %CSVNames[MonthNumber])
+SensorData = pd.read_csv('csv/%s' %CSVNames[MonthNumber])
 
 for i in range(TotalHours+1):    
   
@@ -86,17 +85,17 @@ for j in range(TotalHours+1):
   fig.add_trace(go.Scatter(x=SensorData.loc[StartHour:EndHour,"TIME"],
                          y=HydroPower,
                          name='Hydro Power',
-                         line=dict(color='seagreen', width=4)))
+                         line=dict(color='Teal', width=4)))
 
   fig.add_trace(go.Scatter(x=SensorData.loc[StartHour:EndHour,"TIME"], 
                          y=SensorData.loc[StartHour:EndHour,C_Name[19]],
                          name='CoGen 1',
-                         line=dict(color='turquoise', width=4)))
+                         line=dict(color='Turquoise', width=4)))
 
   fig.add_trace(go.Scatter(x=SensorData.loc[StartHour:EndHour,"TIME"], 
                          y=SensorData.loc[StartHour:EndHour,C_Name[20]],
                          name='CoGen 2',
-                         line=dict(color='teal', width=4)))
+                         line=dict(color='Paleturquoise', width=4)))
   fig.add_shape(
         # Line Vertical
         dict(
@@ -117,5 +116,7 @@ for j in range(TotalHours+1):
 
             
   #Outputs the chart to the image files.
-  FileName = ("StackedLineFig%d.svg" %j)
+  print ("chart %s" %j)
+  
+  FileName = ("LineWeb/charts/StackedLineFig%d.svg" %j)
   fig.write_image(FileName)
