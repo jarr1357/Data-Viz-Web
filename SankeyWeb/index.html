@@ -122,17 +122,28 @@
     </footer>
 
     <script>
+
+    var now = new Date();
+    var night = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() +1, // the next day, ...
+        01, 0, 0 // ...at 01:00:00 hours
+    );
+    var msTillMidnight = night.getTime() - now.getTime();
+    setTimeout('window.location.reload(true)', msTillMidnight);
+
+    var d = now.getDate();
+    var m = now.getMonth()+1;
+    var y = now.getFullYear()-1;
+    var t = now.getTime();
+    var date = String(y)+"/"+String(m)+"/"+String(d);
+    document.getElementById("tfdate").innerHTML = date;
+
 var slideIndex = 0;
 showSlides();
 
 function showSlides() {
-
-  var n = new Date();
-  var d = n.getDate();
-  var m = n.getMonth()+1;
-  var y = n.getFullYear()-1;
-  var date = String(y)+"/"+String(m)+"/"+String(d);
-  document.getElementById("tfdate").innerHTML = date;
 
   var i;
   var slides = document.getElementsByClassName("mySlides");
@@ -147,6 +158,7 @@ function showSlides() {
     document.getElementById("tfhour").innerHTML = slideIndex-1;
   setTimeout(showSlides, 2500); // Change image every 2 seconds
 }
+
 </script>
 
   </body>

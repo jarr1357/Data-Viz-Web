@@ -99,31 +99,40 @@
     </footer>
 
     <script>
-var slideIndex = 0;
-showSlides();
+    
+    var now = new Date();
+    var night = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() +1, // the next day, ...
+        01, 0, 0 // ...at 01:00:00 hours
+    );
+    var msTillMidnight = night.getTime() - now.getTime();
+    setTimeout('window.location.reload(true)', msTillMidnight);
 
-function showSlides() {
+    var d = now.getDate();
+    var m = now.getMonth()+1;
+    var y = now.getFullYear()-1;
+    var t = now.getTime();
+    var date = String(y)+"/"+String(m)+"/"+String(d);
+    document.getElementById("tfdate").innerHTML = date;
 
-  var n = new Date();
-  var d = n.getDate();
-  var m = n.getMonth()+1;
-  var y = n.getFullYear()-1;
-  var date = String(y)+"/"+String(m)+"/"+String(d);
-  document.getElementById("tfdate").innerHTML = date;
+    var slideIndex = 0;
+    showSlides();
 
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}
+      slides[slideIndex-1].style.display = "block";
+      document.getElementById("tfhour").innerHTML = slideIndex-1;
+      setTimeout(showSlides, 2500); // Change image every 2 seconds
+    }
 
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-
-  slides[slideIndex-1].style.display = "block";
-    document.getElementById("tfhour").innerHTML = slideIndex-1;
-  setTimeout(showSlides, 2500); // Change image every 2 seconds
-}
 </script>
 
   </body>
