@@ -121,42 +121,45 @@
       <h1>Data Visualization Project </h1>
     </footer>
 
-    <script>
+<script>
 
-    var now = new Date();
-    var night = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate() +1, // the next day, ...
-        01, 0, 0 // ...at 01:00:00 hours
-    );
-    var msTillMidnight = night.getTime() - now.getTime();
-    setTimeout('window.location.reload(true)', msTillMidnight);
+//Finds time until specified time and creates a timeout
+var now = new Date();
+var night = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() +1, // the next day, ...
+    01, 0, 0 // ...at 01:00:00 hours
+);
+var msTillMidnight = night.getTime() - now.getTime();
+setTimeout('window.location.reload(true)', msTillMidnight); //reload webpage after time has passed
 
-    var d = now.getDate();
-    var m = now.getMonth()+1;
-    var y = now.getFullYear()-1;
-    var t = now.getTime();
-    var date = String(y)+"/"+String(m)+"/"+String(d);
-    document.getElementById("tfdate").innerHTML = date;
+//Updates display date at top of page
+var d = now.getDate();
+var m = now.getMonth()+1;
+var y = now.getFullYear()-1;
+var t = now.getTime();
+var date = String(y)+"/"+String(m)+"/"+String(d);
+document.getElementById("tfdate").innerHTML = date;
 
+//Slideshow - rotates through deck made in earlier html div section
 var slideIndex = 0;
 showSlides();
 
 function showSlides() {
 
   var i;
-  var slides = document.getElementsByClassName("mySlides");
+  var slides = document.getElementsByClassName("mySlides"); //finds slides by mySlides name
 
-  for (i = 0; i < slides.length; i++) {
+  for (i = 0; i < slides.length; i++) { //makes a loop for transitioning
     slides[i].style.display = "none";
   }
   slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
+  if (slideIndex > slides.length) {slideIndex = 1} //go back to top after all slides shown
 
   slides[slideIndex-1].style.display = "block";
     document.getElementById("tfhour").innerHTML = slideIndex-1;
-  setTimeout(showSlides, 2500); // Change image every 2 seconds
+  setTimeout(showSlides, 2500); // Change image every 2.5 seconds
 }
 
 </script>
