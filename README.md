@@ -5,7 +5,9 @@ different charts.
 
 This set of programs is run on an ubuntu EC2 AWS machine. 
 
-Cronjobs execute the programs at 12:15am to produce new graphs.
+Cronjobs must be created that execute the 3 python programs (Images_AutomatedLine, Images_AutomatedPie, 
+Images_AutomatedSankey) at 12:15am to produce new graphs. 
+
 Website includes javascript that forces a reboot at 1am
   -keeps websites synchronized
   -updates graphics to include the newly generated images
